@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useLoaderData, useLocation } from 'react-router-dom';
 import PackageDetailsBanner from '../PackageDetails/PackageDetailsBanner';
 import CheckOutBanner from './CheckOutBanner';
+import Swal from 'sweetalert2';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const CheckOut = () => {
 
     const checkoutPackage = useLoaderData();
+    const { _id, title, img } = checkoutPackage;
+
+    const { user } = useContext(AuthContext);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -16,7 +21,37 @@ const CheckOut = () => {
         const location = form.location.value;
         const deliveryDate = form.date.value;
 
-        console.log(name, phoneNumber, location, deliveryDate);
+        const bookings = {
+            package_id: _id,
+            package_title: title,
+            package_image: img,
+            customer_name: name,
+            customer_email: user.email || null,
+            customer_phoneNumber: phoneNumber,
+            delivery_address: location,
+            delivery_date: deliveryDate
+        }
+
+        fetch('http://localhost:5000/bookings', {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(bookings)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.acknowledged) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successfully Booked',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    form.reset();
+                }
+            })
 
     }
 
@@ -32,10 +67,10 @@ const CheckOut = () => {
                 <form onSubmit={handleSubmit} className='bg-base-200 p-6 rounded-lg'>
                     <h2 className='text-2xl mb-6'>Fill-Up The Form!!</h2>
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-2'>
-                        <input type="text" name='name' placeholder="Name" className="input input-bordered w-full max-w-xs" />
-                        <input type="text" name='phoneNumber' placeholder="Phone Number" className="input input-bordered w-full max-w-xs " />
-                        <input type="text" name='location' placeholder="Location" className="input input-bordered w-full max-w-xs" />
-                        <input type="date" name='date' className="input input-bordered w-full max-w-xs" />
+                        <input type="text" name='name' placeholder="Name" className="input input-bordered w-full max-w-xs" required />
+                        <input type="text" name='phoneNumber' placeholder="Phone Number" className="input input-bordered w-full max-w-xs" required />
+                        <input type="text" name='location' placeholder="Location" className="input input-bordered w-full max-w-xs" required />
+                        <input type="date" name='date' className="input input-bordered w-full max-w-xs" required />
                     </div>
                     <input type="submit" className="btn btn-outline w-full my-2" />
                 </form>
