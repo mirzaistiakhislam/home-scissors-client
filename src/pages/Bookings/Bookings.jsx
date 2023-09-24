@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 const Bookings = () => {
 
     const { bookings, setBookings } = useContext(CartContext);
+    // console.log(bookings);
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -40,6 +41,26 @@ const Bookings = () => {
         })
     }
 
+    const handleUpdate = (id) => {
+        fetch(`http://localhost:5000/bookings/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ status: 'confirmed' })
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    const remaining = bookings.filter(booking => booking._id !== id);
+                    const updated = bookings.find(booking => booking._id === id);
+                    updated.status = 'confirmed';
+                    const newBookings = [updated, ...remaining];
+                    setBookings(newBookings);
+                }
+            })
+    }
+
 
     return (
         <div>
@@ -51,6 +72,7 @@ const Bookings = () => {
                                 key={booking._id}
                                 booking={booking}
                                 handleDelete={handleDelete}
+                                handleUpdate={handleUpdate}
                             ></BookingsRow>)
                         }
 

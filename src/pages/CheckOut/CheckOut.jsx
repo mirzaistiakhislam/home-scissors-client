@@ -44,18 +44,19 @@ const CheckOut = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 if (data.acknowledged) {
                     Swal.fire({
                         icon: 'success',
                         title: 'Successfully Booked',
                         showConfirmButton: false,
-                        timer: 3000
+                        timer: 5000
                     });
-                    form.reset();
-                    window.location.reload();
+
                     navigate('/');
+                    window.location.reload();
                 }
+
             })
     }
 
