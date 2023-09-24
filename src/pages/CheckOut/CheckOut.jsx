@@ -4,6 +4,7 @@ import PackageDetailsBanner from '../PackageDetails/PackageDetailsBanner';
 import CheckOutBanner from './CheckOutBanner';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../contexts/AuthProvider';
+import { CartContext } from '../../contexts/CartProvider';
 
 const CheckOut = () => {
 
@@ -49,13 +50,13 @@ const CheckOut = () => {
                         icon: 'success',
                         title: 'Successfully Booked',
                         showConfirmButton: false,
-                        timer: 1500
+                        timer: 3000
                     });
                     form.reset();
+                    window.location.reload();
                     navigate('/');
                 }
             })
-
     }
 
     return (

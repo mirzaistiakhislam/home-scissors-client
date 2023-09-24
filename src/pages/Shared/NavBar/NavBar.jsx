@@ -7,6 +7,7 @@ const NavBar = () => {
 
     const { user, logOut } = useContext(AuthContext);
     const { bookings, setBookings } = useContext(CartContext);
+    // console.log(bookings);
 
     const navigate = useNavigate();
 
