@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useLoaderData, useLocation } from 'react-router-dom';
+import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import PackageDetailsBanner from '../PackageDetails/PackageDetailsBanner';
 import CheckOutBanner from './CheckOutBanner';
 import Swal from 'sweetalert2';
@@ -8,9 +8,10 @@ import { AuthContext } from '../../contexts/AuthProvider';
 const CheckOut = () => {
 
     const checkoutPackage = useLoaderData();
-    const { _id, title, img } = checkoutPackage;
+    const { _id, title, img, price } = checkoutPackage;
 
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -25,6 +26,7 @@ const CheckOut = () => {
             package_id: _id,
             package_title: title,
             package_image: img,
+            package_price: price,
             customer_name: name,
             customer_email: user.email || null,
             customer_phoneNumber: phoneNumber,
@@ -50,6 +52,7 @@ const CheckOut = () => {
                         timer: 1500
                     });
                     form.reset();
+                    navigate('/');
                 }
             })
 

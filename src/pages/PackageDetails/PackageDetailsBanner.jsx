@@ -1,7 +1,7 @@
 import React from 'react';
 
 const PackageDetailsBanner = ({ packageDetails }) => {
-    console.log(packageDetails);
+    // console.log(packageDetails);
     const { img, title } = packageDetails;
 
     return (

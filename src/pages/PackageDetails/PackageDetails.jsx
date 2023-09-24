@@ -7,7 +7,7 @@ const PackageDetails = () => {
 
     const packageDetails = useLoaderData();
     const { Pre_Service_Instructions, benefits, description, facilities, img, options, price, service_id, title, _id } = packageDetails;
-    console.log(options[1]);
+    // console.log(options[1]);
 
     return (
         <div>

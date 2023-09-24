@@ -9,7 +9,7 @@ const Packages = () => {
         fetch('http://localhost:5000/packages')
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 setPackages(data);
             })
     }, [])
