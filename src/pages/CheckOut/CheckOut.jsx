@@ -4,7 +4,6 @@ import PackageDetailsBanner from '../PackageDetails/PackageDetailsBanner';
 import CheckOutBanner from './CheckOutBanner';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../contexts/AuthProvider';
-import { CartContext } from '../../contexts/CartProvider';
 
 const CheckOut = () => {
 
@@ -23,7 +22,7 @@ const CheckOut = () => {
         const location = form.location.value;
         const deliveryDate = form.date.value;
 
-        const bookings = {
+        const booking = {
             package_id: _id,
             package_title: title,
             package_image: img,
@@ -40,21 +39,21 @@ const CheckOut = () => {
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(bookings)
+            body: JSON.stringify(booking)
         })
             .then(res => res.json())
             .then(data => {
-                // console.log(data);
-                if (data.acknowledged) {
+                console.log(data);
+                if (data.insertedId) {
                     Swal.fire({
                         icon: 'success',
                         title: 'Successfully Booked',
                         showConfirmButton: false,
-                        timer: 5000
+                        timer: 1500
                     });
 
                     navigate('/');
-                    window.location.reload();
+                    // window.location.reload();
                 }
 
             })

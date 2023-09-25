@@ -6,8 +6,28 @@ import Swal from 'sweetalert2';
 
 const Bookings = () => {
 
-    const { bookings, setBookings } = useContext(CartContext);
-    // console.log(bookings);
+    // const { bookings, setBookings } = useContext(CartContext);
+    const { user } = useContext(AuthContext);
+
+    const [bookings, setBookings] = useState([]);
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/bookings?email=${user?.email}`, {
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('access-token')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.error === 1) {
+                    console.log(data.message);
+                }
+                else {
+                    setBookings(data);
+                }
+            })
+    }, [user?.email]);
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -68,7 +88,7 @@ const Bookings = () => {
                 <table className="table">
                     <tbody>
                         {
-                            bookings.map(booking => <BookingsRow
+                            bookings.map((booking) => <BookingsRow
                                 key={booking._id}
                                 booking={booking}
                                 handleDelete={handleDelete}
