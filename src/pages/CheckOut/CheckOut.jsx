@@ -4,8 +4,11 @@ import PackageDetailsBanner from '../PackageDetails/PackageDetailsBanner';
 import CheckOutBanner from './CheckOutBanner';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../contexts/AuthProvider';
+import useTitle from '../../hooks/useTitle/useTitle';
 
 const CheckOut = () => {
+
+    useTitle('Checkout - Home Scissors');
 
     const checkoutPackage = useLoaderData();
     const { _id, title, img, price } = checkoutPackage;

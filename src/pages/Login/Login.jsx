@@ -2,8 +2,11 @@ import React, { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 import Swal from 'sweetalert2';
+import useTitle from '../../hooks/useTitle/useTitle';
 
 const Login = () => {
+
+    useTitle('Login - Home Scissors');
 
     const { signIn } = useContext(AuthContext);
     const location = useLocation();

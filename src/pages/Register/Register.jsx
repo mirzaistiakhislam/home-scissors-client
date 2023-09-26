@@ -2,8 +2,11 @@ import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 import Swal from 'sweetalert2';
+import useTitle from '../../hooks/useTitle/useTitle';
 
 const Register = () => {
+
+    useTitle('Register - Home Scissors');
 
     const { createUser } = useContext(AuthContext);
     const navigate = useNavigate();

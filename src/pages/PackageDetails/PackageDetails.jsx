@@ -2,12 +2,14 @@ import React from 'react';
 import PackageDetailsBanner from './PackageDetailsBanner';
 import { Link, useLoaderData } from 'react-router-dom';
 import { FaArrowRightLong, FaCheck } from 'react-icons/fa6';
+import useTitle from '../../hooks/useTitle/useTitle';
 
 const PackageDetails = () => {
 
+    useTitle('Package Details - Home Scissors');
+
     const packageDetails = useLoaderData();
     const { Pre_Service_Instructions, benefits, description, facilities, img, options, price, service_id, title, _id } = packageDetails;
-    // console.log(options[1]);
 
     return (
         <div>

@@ -3,8 +3,11 @@ import { CartContext } from '../../contexts/CartProvider';
 import BookingsRow from './BookingsRow';
 import { AuthContext } from '../../contexts/AuthProvider';
 import Swal from 'sweetalert2';
+import useTitle from '../../hooks/useTitle/useTitle';
 
 const Bookings = () => {
+
+    useTitle('Purchase Packages - Home Scissors');
 
     // const { bookings, setBookings } = useContext(CartContext);
     const { user } = useContext(AuthContext);
