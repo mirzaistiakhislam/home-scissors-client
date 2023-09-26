@@ -6,7 +6,7 @@ const PackageDetailsBanner = ({ packageDetails }) => {
 
     return (
         <div>
-            <div className="carousel w-full h-96">
+            <div className="carousel w-full h-96 rounded-lg">
                 <div id="slide1" className="carousel-item relative w-full">
                     <div className="hero" style={{ backgroundImage: `url(${img})` }}>
                         <div className="hero-overlay bg-opacity-60"></div>

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import { CartContext } from '../../../contexts/CartProvider';
+import { FaCartShopping } from "react-icons/fa6";
 
 const NavBar = () => {
 
@@ -23,7 +24,7 @@ const NavBar = () => {
     const menu =
         <>
             {
-                user && <li><Link to='bookings'>Purchase Packages</Link></li>
+                user && <li className='flex justify-between items-stretch'><Link to='bookings'>Purchase Packages <FaCartShopping className='self-center' /></Link></li>
             }
         </>
 
